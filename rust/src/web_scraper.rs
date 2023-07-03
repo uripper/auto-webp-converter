@@ -1,11 +1,14 @@
 ```rust
+use wasm_bindgen::prelude::*;
 use reqwest::Error;
 use scraper::{Html, Selector};
 
+#[wasm_bindgen]
 pub struct WebScraper {
     url: String,
 }
 
+#[wasm_bindgen]
 impl WebScraper {
     pub fn new(url: String) -> Self {
         WebScraper { url }

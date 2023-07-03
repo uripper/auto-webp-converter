@@ -1,13 +1,14 @@
 ```rust
 extern crate image;
-
+use wasm_bindgen::prelude::*;
 use image::{ImageFormat, ImageDecoder, ImageError};
 use std::fs::File;
 use std::io::BufWriter;
 use std::path::Path;
-
+#[wasm_bindgen]
 pub struct ImageConverter;
 
+#[wasm_bindgen]
 impl ImageConverter {
     pub fn convert_image(image_path: &str, output_format: ImageFormat) -> Result<String, ImageError> {
         let input_file = File::open(image_path)?;
