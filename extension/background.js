@@ -1,4 +1,3 @@
-```javascript
 chrome.runtime.onInstalled.addListener(() => {
   chrome.action.setBadgeBackgroundColor({ color: '#4688F1' });
 });
@@ -37,4 +36,3 @@ function convertImage(imageData, type) {
     worker.postMessage({ action: 'convertImage', imageData, type });
   });
 }
-```

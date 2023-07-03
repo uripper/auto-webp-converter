@@ -1,4 +1,3 @@
-```rust
 extern crate image;
 use wasm_bindgen::prelude::*;
 use image::{ImageFormat, ImageDecoder, ImageError};
@@ -36,4 +35,3 @@ impl ImageConverter {
         Ok(output_path)
     }
 }
-```

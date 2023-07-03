@@ -1,4 +1,3 @@
-```rust
 use wasm_bindgen::prelude::*;
 extern crate image_converter;
 extern crate web_scraper;
@@ -18,4 +17,3 @@ fn main() {
         println!("Image is not in webp or avif format: {}", image_url);
     }
 }
-```

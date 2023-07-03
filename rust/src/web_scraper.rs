@@ -1,4 +1,3 @@
-```rust
 use wasm_bindgen::prelude::*;
 use reqwest::Error;
 use scraper::{Html, Selector};
@@ -36,4 +35,3 @@ impl WebScraper {
         parts.last().unwrap().to_string()
     }
 }
-```
