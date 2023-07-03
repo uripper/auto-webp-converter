@@ -1,19 +1,29 @@
 use wasm_bindgen::prelude::*;
-extern crate image_converter;
-extern crate web_scraper;
+use std::io::Read;
 
-use image_converter::convert_image;
-use web_scraper::scrape_web;
+mod converter;
+mod utils;
 
 #[wasm_bindgen]
-fn main() {
-    let image_url = scrape_web();
-    let image_type = image_url.split(".").last().unwrap();
+pub fn convert(file: JsValue) -> Result<JsValue, JsValue> {
+    let file: utils::File = file.into_serde().unwrap();
+    let converted_file = converter::convert(file)?;
+    Ok(JsValue::from_serde(&converted_file).unwrap())
+}
 
-    if image_type == "webp" || image_type == "avif" {
-        let converted_image = convert_image(&image_url, image_type);
-        println!("Image converted successfully: {}", converted_image);
-    } else {
-        println!("Image is not in webp or avif format: {}", image_url);
+#[cfg(test)]
+mod tests {
+    use super::*;
+    use wasm_bindgen_test::*;
+
+    #[wasm_bindgen_test]
+    fn test_convert() {
+        let file = utils::File {
+            name: String::from("test.webp"),
+            data: vec![],
+            format: String::from("webp"),
+        };
+        let result = convert(JsValue::from_serde(&file).unwrap());
+        assert!(result.is_ok());
     }
 }
