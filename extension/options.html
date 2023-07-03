@@ -2,22 +2,15 @@
 <html>
 <head>
     <title>Options</title>
-    <link rel="stylesheet" type="text/css" href="options.css">
+    <link rel="stylesheet" type="text/css" href="styles.css">
 </head>
 <body>
     <h1>Options</h1>
-    <form id="optionsForm">
-        <label for="conversionFormat">Conversion Format:</label>
-        <select id="conversionFormat">
-            <option value="png">PNG</option>
-            <option value="jpg">JPG</option>
-        </select>
-        <br>
-        <label for="autoConvert">Auto Convert:</label>
-        <input type="checkbox" id="autoConvert">
-        <br>
-        <button type="submit" id="saveOptions">Save</button>
-    </form>
+    <div id="fileList">
+        <h2>File List</h2>
+        <!-- File list will be populated by options.js -->
+    </div>
+    <button id="optionsButton">Save Options</button>
     <script src="options.js"></script>
 </body>
 </html>
