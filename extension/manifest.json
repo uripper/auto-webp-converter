@@ -1,30 +1,33 @@
 {
-  "manifest_version": 3,
-  "name": "Automatic Converter of WEBP and AVIF to PNG or JPG",
+  "manifest_version": 2,
+  "name": "WebP & AVIF Converter",
   "version": "1.0",
-  "description": "A Chrome extension that automatically finds the source of the image downloaded as webp and instead downloads the source image. If that source image is still webp, convert it to png or jpg.",
-  "permissions": ["downloads", "webRequest", "webRequestBlocking", "storage", "<all_urls>"],
-  "action": {
-    "default_popup": "popup.html",
-    "default_icon": {
-      "16": "images/icon16.png",
-      "48": "images/icon48.png",
-      "128": "images/icon128.png"
-    }
-  },
-  "background": {
-    "service_worker": "background.js"
-  },
-  "options_page": "options.html",
+  "description": "Automatically convert webp and avif files being downloaded by chrome to either the source jpg or png of the file, or actively converting them to png or jpg when that is not available.",
   "icons": {
     "16": "images/icon16.png",
     "48": "images/icon48.png",
     "128": "images/icon128.png"
+  },
+  "background": {
+    "scripts": ["background.js"],
+    "persistent": false
   },
   "content_scripts": [
     {
       "matches": ["<all_urls>"],
       "js": ["content.js"]
     }
+  ],
+  "permissions": [
+    "downloads",
+    "storage"
+  ],
+  "browser_action": {
+    "default_icon": "images/icon.png",
+    "default_popup": "popup.html"
+  },
+  "options_page": "options.html",
+  "web_accessible_resources": [
+    "wasm/converter.wasm"
   ]
 }

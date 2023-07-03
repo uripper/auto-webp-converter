@@ -1,0 +1,23 @@
+{
+  "name": "chrome-extension-converter",
+  "version": "1.0.0",
+  "description": "A Chrome extension to convert webp and avif files to jpg or png",
+  "main": "extension/background.js",
+  "scripts": {
+    "test": "node scripts/test.js",
+    "build": "node scripts/build.js",
+    "clean": "node scripts/clean.js",
+    "compile": "node scripts/compile_wasm.js"
+  },
+  "keywords": ["chrome", "extension", "converter", "webp", "avif", "jpg", "png"],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "wasm": "^1.0.0"
+  },
+  "devDependencies": {
+    "webpack": "^4.44.2",
+    "rustc": "^1.48.0",
+    "wasm-pack": "^0.9.1"
+  }
+}

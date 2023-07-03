@@ -1,40 +1,39 @@
-```javascript
-chrome.runtime.onInstalled.addListener(() => {
-  chrome.action.setBadgeBackgroundColor({ color: '#4688F1' });
-});
+// Importing WASM module
+const wasm = import('../pkg/converter');
 
-chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
-  if (request.action === 'convertImage') {
-    fetchImage(request.imageUrl)
-      .then(imageData => convertImage(imageData, request.imageType))
-      .then(convertedImage => {
-        sendResponse({ action: 'conversionComplete', convertedImage });
-      })
-      .catch(error => {
-        console.error('Error converting image:', error);
-        sendResponse({ action: 'conversionFailed', error: error.message });
-      });
-    return true;  // Will respond asynchronously.
+// Listening for downloads
+chrome.downloads.onCreated.addListener((downloadItem) => {
+  if (downloadItem.filename.endsWith('.webp') || downloadItem.filename.endsWith('.avif')) {
+    chrome.downloads.cancel(downloadItem.id, () => {
+      convertFile(downloadItem);
+    });
   }
 });
 
-function fetchImage(url) {
-  return fetch(url)
-    .then(response => response.arrayBuffer())
-    .then(buffer => new Uint8Array(buffer));
+// Function to convert file
+async function convertFile(downloadItem) {
+  const { converter } = await wasm;
+  const file = await fetch(downloadItem.url).then(response => response.arrayBuffer());
+  const convertedFile = converter.convert(file, downloadItem.filename);
+  downloadConvertedFile(convertedFile, downloadItem.filename);
 }
 
-function convertImage(imageData, type) {
-  return new Promise((resolve, reject) => {
-    const worker = new Worker('rust/src/main.rs');
-    worker.onmessage = event => {
-      if (event.data.action === 'conversionComplete') {
-        resolve(event.data.convertedImage);
-      } else if (event.data.action === 'conversionFailed') {
-        reject(new Error(event.data.error));
-      }
-    };
-    worker.postMessage({ action: 'convertImage', imageData, type });
-  });
+// Function to download converted file
+function downloadConvertedFile(file, filename) {
+  const url = URL.createObjectURL(new Blob([file]));
+  const downloadOptions = {
+    url: url,
+    filename: filename.replace(/\.webp$|\.avif$/, '.png'),
+    conflictAction: 'uniquify'
+  };
+  chrome.downloads.download(downloadOptions);
 }
-```
+
+// Listening for messages
+chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
+  if (request.command === 'convert') {
+    convertFile(request.file);
+  } else if (request.command === 'options') {
+    chrome.runtime.openOptionsPage();
+  }
+});
