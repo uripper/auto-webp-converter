@@ -1,19 +1,13 @@
-1. **Manifest.json**: This file will contain the metadata for the extension, including the manifest version, name, description, permissions, background scripts, content scripts, and popup details. It will be shared with all other files as it defines the overall structure and behavior of the extension.
+1. "manifest.json": This file contains metadata for the extension such as name, version, permissions, and scripts to be run. It will share the names of the scripts ("background.js", "popup.js", "options.js", "content.js") with the corresponding JS files.
 
-2. **Popup.html & Popup.css**: These files will define the structure and style of the popup UI of the extension. They will share the id names of DOM elements with Popup.js, such as "convertButton", "statusDisplay", etc.
+2. "background.js": This file contains the background logic of the extension. It will share function names, message names, and possibly exported variables with "popup.js", "options.js", and "content.js". It will also share the name of the WASM module with "wasm_module.wasm".
 
-3. **Popup.js**: This file will handle the user interaction within the popup. It will share function names with Background.js for message passing, such as "convertImage", "updateStatus", etc.
+3. "popup.js", "options.js", "content.js": These files contain the front-end logic of the extension. They will share id names of DOM elements, function names, message names, and possibly exported variables with each other and "background.js". They will also share the name of the WASM module with "wasm_module.wasm".
 
-4. **Background.js**: This file will handle the core functionality of the extension. It will share message names with Content.js and Popup.js for communication, such as "imageFound", "conversionComplete", etc.
+4. "wasm_module.rs": This is the Rust source file that will be compiled to WASM. It will share function names and data schemas with the WASM module and the JS files that call it.
 
-5. **Content.js**: This file will interact with the web pages to find and replace images. It will share data schemas with Background.js for passing image data, such as "imageUrl", "imageType", etc.
+5. "Cargo.toml": This is the package manager file for Rust. It will share the name and version of the Rust package with "wasm_module.rs" and "build.rs".
 
-6. **Options.html & Options.css**: These files will define the structure and style of the options page of the extension. They will share the id names of DOM elements with Options.js, such as "saveOptions", "restoreOptions", etc.
+6. "build.rs": This is the build script for the Rust package. It will share the name of the Rust package with "Cargo.toml" and "wasm_module.rs".
 
-7. **Options.js**: This file will handle the user interaction within the options page. It will share exported variables with Background.js for storing user preferences, such as "conversionFormat", "autoConvert", etc.
-
-8. **Main.rs**: This file will be the entry point of the Rust program. It will share function names with Web_scraper.rs and Image_converter.rs for calling their functionalities, such as "scrapeWeb", "convertImage", etc.
-
-9. **Web_scraper.rs**: This file will handle the web scraping to find the source image. It will share data schemas with Main.rs for returning image data, such as "imageUrl", "imageType", etc.
-
-10. **Image_converter.rs**: This file will handle the image conversion. It will share exported variables with Main.rs for storing conversion results, such as "convertedImage", "conversionStatus", etc.
+7. "wasm_module.wasm": This is the compiled WASM module. It will share function names and data schemas with "wasm_module.rs" and the JS files that call it.
