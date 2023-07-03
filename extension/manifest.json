@@ -1,0 +1,30 @@
+{
+  "manifest_version": 3,
+  "name": "Automatic Converter of WEBP and AVIF to PNG or JPG",
+  "version": "1.0",
+  "description": "A Chrome extension that automatically finds the source of the image downloaded as webp and instead downloads the source image. If that source image is still webp, convert it to png or jpg.",
+  "permissions": ["downloads", "webRequest", "webRequestBlocking", "storage", "<all_urls>"],
+  "action": {
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "images/icon16.png",
+      "48": "images/icon48.png",
+      "128": "images/icon128.png"
+    }
+  },
+  "background": {
+    "service_worker": "background.js"
+  },
+  "options_page": "options.html",
+  "icons": {
+    "16": "images/icon16.png",
+    "48": "images/icon48.png",
+    "128": "images/icon128.png"
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content.js"]
+    }
+  ]
+}
