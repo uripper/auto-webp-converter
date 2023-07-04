@@ -17,10 +17,20 @@ h1 {
     font-size: 24px;
     margin-bottom: 20px;
 }
+:root {
+    --primary-text-color: #E8EEEE;
+    --primary-background-color: #53AC8A;
+    --primary-shadow-color: #03322A;
+    --secondary-text-color: #78EEDD;
+    --secondary-background-color: #06452C;
+    --secondary-shadow-color: #1EEBC9;
+    --primary_font: "Bungee Spice", sans-serif;
+    --secondary_font: "Tilt Prism", sans-serif;
 
+}
 button#saveOption {
-    background-color: #4CAF50;
-    color: white;
+    background-color: var(--primary-background-color);
+    color: var(--primary-text-color);
     padding: 15px 32px;
     text-align: center;
     text-decoration: none;
@@ -33,5 +43,5 @@ button#saveOption {
 }
 
 button#saveOption:hover {
-    background-color: #45a049;
+    background-color: var(--secondary-background-color);
 }

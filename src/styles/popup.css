@@ -1,34 +1,42 @@
+:root {
+    --primary-text-color: #E8EEEE;
+    --primary-background-color: #53AC8A;
+    --primary-shadow-color: #03322A;
+    --secondary-text-color: #78EEDD;
+    --secondary-background-color: #06452C;
+    --secondary-shadow-color: #1EEBC9;
+    --primary_font: "Bungee Spice", sans-serif;
+    --secondary_font: "Tilt Prism", sans-serif;
+
+}
 body {
-    font-family: Arial, sans-serif;
+    font-family: var(--primary_font);
+    font-size: x-large;
     margin: 0;
     padding: 0;
-    background-color: #f0f0f0;
-}
-
-#convertButton {
-    display: block;
-    width: 100%;
-    padding: 10px;
-    margin-top: 20px;
-    background-color: #4CAF50;
-    color: white;
-    border: none;
-    cursor: pointer;
+    background-color: var(--primary-background-color);
+    color: var(--primary-text-color);
+    text-shadow: var(--primary-shadow-color) 1px 1px 0px;
+    width: 250px;
+    height: 500px;
     text-align: center;
 }
 
-#optionsButton {
+#convertButton, #optionsButton {
+    font-family: var(--secondary_font);
+    font-size: xx-large;
+    text-shadow: var(--secondary-shadow-color) 2px 2px 10px;
     display: block;
     width: 100%;
     padding: 10px;
     margin-top: 20px;
-    background-color: #008CBA;
-    color: white;
+    background-color: var(--secondary-background-color);
+    color: var(--secondary-text-color);
     border: none;
     cursor: pointer;
     text-align: center;
 }
 
 #convertButton:hover, #optionsButton:hover {
-    opacity: 0.8;
+    opacity: 0.5;
 }
