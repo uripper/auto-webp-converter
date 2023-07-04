@@ -1,13 +1,13 @@
 # WebP to PNG Chrome Extension
 
 ## Description
-This is a Google Chrome extension that automatically converts .webp image files to .png format during downloads. It listens for download events, checks if the file being downloaded is a WebP image, and if so, converts it to PNG before saving it to the disk.
+This Google Chrome extension automatically converts .webp image files to .png format during downloads. It listens for download events, checks if the downloaded file is a WebP image, and converts it to PNG before saving it to the disk.
 
 ## Setup
-1. Clone the repository with `git clone <repository_url>`
-2. Open the Google Chrome browser.
+1. Clone the repository with `git clone https://github.com/uripper/auto-webp-converter.git`
+2. Open the Google Chrome.`rowser.
 3. Navigate to `chrome://extensions/`.
-4. Check the box for Developer mode in the top right.
+4. Check the box  Developer mode in the top right.
 5. Click on "Load Unpacked" and select the src folder of this cloned repository.
 
 ## Usage
