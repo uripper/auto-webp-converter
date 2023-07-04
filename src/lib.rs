@@ -4,6 +4,7 @@ use image::{ImageFormat, load};
 
 mod utils;
 mod converter;
+mod settings;
 
 #[wasm_bindgen]
 pub struct File {
@@ -33,7 +34,8 @@ impl File {
 pub fn convert(file: &File) -> Result<File, JsValue> {
     let cursor = Cursor::new(&file.data);
     let img = load(cursor, ImageFormat::WebP).map_err(|e| e.to_string())?;
-    let mut buffer = Vec::new();
+    let mut buffer = Cursor::new(Vec::new());
     img.write_to(&mut buffer, ImageFormat::Png).map_err(|e| e.to_string())?;
+    let buffer = buffer.into_inner();
     Ok(File::new(file.name.clone(), buffer))
 }
