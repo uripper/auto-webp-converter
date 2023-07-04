@@ -8,7 +8,7 @@ export function convertWebpToPng(webp: Blob): Promise<Blob> {
                 canvas.width = img.width;
                 canvas.height = img.height;
                 const context = canvas.getContext('2d');
-                context.drawImage(img, 0, 0, img.width, img.height);
+                context?.drawImage(img, 0, 0, img.width, img.height);
                 canvas.toBlob((blob) => {
                     if (blob) {
                         resolve(blob);
@@ -17,13 +17,27 @@ export function convertWebpToPng(webp: Blob): Promise<Blob> {
                     }
                 }, 'image/png');
             };
+            reader.onload = function(event) {
+                if (event.target && event.target.result) {
+            const blobPart: BlobPart = event.target.result as BlobPart;
             img.src = URL.createObjectURL(new Blob([event.target.result]));
-        };
-        reader.readAsArrayBuffer(webp);
-    });
+        } else {
+            reject(new Error('FileReader operation failed'));
+        }
+    }
+    reader.onerror = function(event) {
+        reject(new Error('FileReader operation failed'));
+    }
+    reader.readAsArrayBuffer(webp);
+}
+reader.onerror = function(event) {
+    reject(new Error('FileReader operation failed'));
+}
+reader.readAsArrayBuffer(webp);
+});
 }
 
-export function saveToLocalStorage(key: string, value: any): Promise<void> {
+function saveToLocalStorage(key: string, value: any): Promise<void> {
     return new Promise((resolve, reject) => {
         try {
             chrome.storage.local.set({ [key]: value }, () => {
@@ -53,4 +67,15 @@ export function loadFromLocalStorage(key: string): Promise<any> {
             reject(error);
         }
     });
+}
+export type Image = {
+    slice: Blob;
+    stream: ReadableStream;
+    text: string;
+    prototype: HTMLImageElement;
+    size: number;
+    type: string;
+    arrayBuffer: ArrayBuffer;
+    src: string;
+            
 }

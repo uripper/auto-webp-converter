@@ -2,7 +2,7 @@
   "name": "webp-to-png-converter",
   "version": "1.0.0",
   "description": "A Chrome extension that converts downloaded webp images to png.",
-  "main": "src/background.ts",
+  "main": "src/dist/background.js",
   "scripts": {
     "build": "webpack",
     "start": "webpack --watch",
@@ -16,10 +16,17 @@
   ],
   "author": "",
   "license": "ISC",
-  "dependencies": {},
   "devDependencies": {
+    "@types/eslint": "^8.40.2",
+    "@types/estree": "^1.0.1",
+    "@types/json-schema": "^7.0.12",
+    "@types/node": "^20.3.3",
+    "ts-loader": "^9.4.4",
     "typescript": "^4.3.5",
     "webpack": "^5.51.1",
-    "ts-loader": "^9.2.5"
+    "webpack-cli": "^5.1.4"
+  },
+  "dependencies": {
+    "@types/chrome": "^0.0.239"
   }
 }

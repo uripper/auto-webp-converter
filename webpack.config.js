@@ -2,6 +2,7 @@ const path = require('path');
 const webpack = require('webpack');
 
 module.exports = {
+  devtool: false,
   entry: {
     background: path.join(__dirname, 'src', 'background.ts'),
     content: path.join(__dirname, 'src', 'content.ts'),
@@ -19,7 +20,7 @@ module.exports = {
         use: 'ts-loader',
         exclude: /node_modules/,
       },
-    ],
+    ]
   },
   resolve: {
     extensions: ['.tsx', '.ts', '.js'],

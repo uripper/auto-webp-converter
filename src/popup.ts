@@ -5,14 +5,16 @@ document.addEventListener('DOMContentLoaded', () => {
   const convertButton = document.getElementById('convertButton');
   const optionsButton = document.getElementById('optionsButton');
 
-  convertButton.addEventListener('click', () => {
+  convertButton?.addEventListener('click', () => {
     chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
       const activeTab = tabs[0];
-      chrome.tabs.sendMessage(activeTab.id, { message: 'convertImage' });
+      if (activeTab) {
+        chrome.tabs.sendMessage(activeTab.id as number, { message: 'convertImage' });
+      }
     });
   });
 
-  optionsButton.addEventListener('click', () => {
+  optionsButton?.addEventListener('click', () => {
     if (chrome.runtime.openOptionsPage) {
       chrome.runtime.openOptionsPage();
     } else {
