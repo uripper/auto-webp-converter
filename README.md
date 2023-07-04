@@ -14,7 +14,7 @@ This Google Chrome extension automatically converts .webp image files to .png fo
 After installing the extension, it works automatically. Whenever you download a .webp file, the extension will detect it, convert it to .png format and then save it to your default download location.
 
 ## Limitations
-So that you know, this extension only works with .webp files that are being downloaded. It doesn't affect .webp files that are being displayed in the browser.
+This extension only works with .webp files that are being downloaded. It does not currently have the ability to choose the filename, where the file will be saved, or output format. These are all things that will hopefully be added.
 
 ## Future Improvements
 In the future, we want to add more image conversion options and provide a user-friendly options page where users can customize their image download preferences.
